@@ -1,0 +1,175 @@
+:root {
+    --primary-color: #003366;
+    /* Deep Navy Blue */
+    --accent-color: #d32f2f;
+    /* Red for memory items */
+    --bg-color: #f4f5f7;
+    --text-color: #333;
+    --card-bg: #fff;
+    --border-color: #ddd;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Topic List */
+.topic-list {
+    list-style: none;
+    padding: 0;
+}
+
+.topic-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.topic-item:hover {
+    background-color: #eef;
+}
+
+.topic-category {
+    font-size: 0.8rem;
+    color: #666;
+    display: inline-block;
+    background: #eee;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.topic-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Topic Detail */
+.detail-view {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.content-body {
+    font-size: 1rem;
+}
+
+/* Masking Logic */
+/* By default (or when .mask-active class is present on container), hide the text */
+.mask-active .span-memory {
+    color: transparent;
+    background-color: var(--accent-color);
+    user-select: none;
+    /* Prevent cheating by selection */
+    border-radius: 2px;
+    padding: 0 2px;
+    cursor: pointer;
+}
+
+/* To reveal on hover or click (if we add a revealed class) */
+.mask-active .span-memory.revealed {
+    color: var(--accent-color);
+    background-color: rgba(211, 47, 47, 0.1);
+}
+
+/* When mask is OFF globally */
+.span-memory {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Utilities */
+.hidden {
+    display: none;
+}
+
+/* Stealth Mode */
+body.stealth-mode header {
+    display: none;
+}
+
+/* Override mask color in stealth mode */
+body.stealth-mode .mask-active .span-memory {
+    background-color: #dcdcdc;
+    /* Subtle gray */
+    color: transparent;
+}
+
+/* Revealed item in stealth mode */
+body.stealth-mode .mask-active .span-memory.revealed {
+    background-color: transparent;
+    /* Or keep subtle? User said "after turning", text should be inconspicuous */
+    color: inherit;
+    /* Use standard text color */
+    font-weight: normal;
+    /* No bold */
+    border: 1px dashed #bbb;
+    /* Optional: hint that it was masked */
+}
+
+/* When mask is OFF globally in stealth mode */
+body.stealth-mode .span-memory {
+    color: inherit;
+    font-weight: normal;
+    text-decoration: underline;
+    /* Optional: slight hint it's a keyword, or just plain */
+    text-decoration-color: #ccc;
+}
+
+/* Also hide the "Red Sheet" text emphasis if relevant, but main request is mask bg. */

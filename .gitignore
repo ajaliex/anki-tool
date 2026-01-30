@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# System
+.DS_Store
+Thumbs.db
+
+# Studying.jp resource folders (save as complete)
+*_files/
+*_files
+
+# Detailed HTML content directories (if user wants to exclude source HTML)
+# content/ 
+# Uncomment above if you only want to commit the build artifacts (topics.json, index.html)
+# But keeping source is usually better for backup.
