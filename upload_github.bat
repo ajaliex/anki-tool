@@ -33,17 +33,20 @@ git add .
 echo [INFO] Committing changes...
 git commit -m "Update topic data" >nul 2>nul
 
-echo.
-echo ========================================================
-echo Please enter your GitHub Repository URL.
-echo (Right-click to paste)
-echo Example: https://github.com/YourName/anki-tool.git
-echo ========================================================
-set /p REPO_URL="Repository URL: "
-
-:: Update remote
-git remote remove origin >nul 2>nul
-git remote add origin !REPO_URL!
+:: Check if remote 'origin' is already configured
+git remote get-url origin >nul 2>nul
+if %ERRORLEVEL% equ 0 (
+    echo [INFO] Repository URL is already configured. No need to re-enter.
+) else (
+    echo.
+    echo ========================================================
+    echo Please enter your GitHub Repository URL.
+    echo (Right-click to paste)
+    echo Example: https://github.com/YourName/anki-tool.git
+    echo ========================================================
+    set /p REPO_URL="Repository URL: "
+    git remote add origin !REPO_URL!
+)
 
 :: Push
 echo.
